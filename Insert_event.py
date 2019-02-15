@@ -17,11 +17,11 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 @app.route('/')
 def home_page():
-	redirect = url_for('api_request',_external = True)
+	redirect = flask.url_for('event',_external = True)
 	return '<h1>for login click <a href = "{}">here</a></h1>'.format(redirect)
 
-@app.route('/test')
-def api_request():
+@app.route('/event/')
+def event():
   if 'credentials' not in flask.session:
     return flask.redirect('authorize')
 
@@ -31,9 +31,21 @@ def api_request():
 
   cal = googleapiclient.discovery.build(
       service, version, credentials=credentials)
-
-  files = drive.files().list().execute()
-
+  """
+  event = {
+  	'summary': '{}'.format(),
+  	'description': '{}'.format(Des),
+	'start': 
+	    {
+	    'dateTime': '{}+05:30'.format(startT)
+	    },
+	'end' : 
+	    {
+	    'dateTime': '{}+05:30'.format(endT)
+	    }
+	}
+  event = cal.events().insert(calendarId='primary', body=event).execute()
+	"""
   # Save credentials back to session in case access token was refreshed.
   # ACTION ITEM: In a production app, you likely want to save these
   #              credentials in a persistent database instead.
@@ -103,4 +115,4 @@ if __name__ == '__main__':
 
   # Specify a hostname and port that are set as a valid redirect URI
   # for your API project in the Google API Console.
-  app.run(port=20001, use_reloader=True, debug=True)
+  app.run(port=21001, use_reloader=True, debug=True)
