@@ -1,1 +1,1 @@
-web gunicorn app:Insert_event
+web gunicorn Insert_event:app
