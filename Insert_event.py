@@ -2,23 +2,38 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 
-import flask
+from flask import Flask , url_for , render_template 
 import requests
 import os
+from forms import RegistrationForm,LoginForm
+
 
 scopes = ['https://www.googleapis.com/auth/calendar']
 service = 'calendar'
 version = 'v3'
 
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 @app.route('/')
 def home_page():
-	redirect = flask.url_for('event',_external = True)
+	redirect = url_for('register_page',_external = True)
 	return '<h1>for login click <a href = "{}">here</a></h1>'.format(redirect)
+
+@app.route('/register')
+def register_page():
+	form =  RegistrationForm()
+	return render_template('register_page.html',form = form,
+		title = 'Register')
+
+@app.route('/login')
+def login_page():
+	form =  LoginForm()
+	return render_template('login_page.html',form = form,
+		title = 'Login')
+
 
 @app.route('/event/')
 def event():

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class = "content-section">
+		<form method = "POST" action = "">
+			{{ form.hidden_tag() }} 
+			<fieldset class =  "">
+				<legend class=" "></legend>
+				<div class = " ">
+					{{ form.username.label( ) }}
+					{{ form.username() }}
+				</div>
+				<div class = " ">
+					{{ form.email.label( ) }}
+					{{ form.email() }}
+				</div>
+				<div class = " ">
+					{{ form.password.label( ) }}
+					{{ form.password() }}
+				</div>
+				<div class = " ">
+					{{ form.confirm_password.label( ) }}
+					{{ form.confirm_password() }}
+				</div>
+
+			</fieldset>
+			
+
+		</form>			
+{% endblock content %}
